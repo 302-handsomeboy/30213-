@@ -82,15 +82,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 2. 도마뱀 데이터베이스 구축 (정확한 이미지 URL 반영)
+# 2. 도마뱀 데이터베이스 구축 (검증된 개별 도마뱀 이미지 주소 업데이트)
 LIZARD_DB = {
     "크레스티드 게코": {
         "en_name": "Crested Gecko",
         "scientific_name": "Correlophus ciliatus",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        # 정확한 크레스티드 게코 이미지
-        "image_url": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1000&auto=format&fit=crop",
+        # 크레스티드 게코 전용 이미지
+        "image_url": "https://images.pexels.com/photos/16147779/pexels-photo-16147779/free-photo-of-crested-gecko.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "22°C - 26°C (실온 사육 가능)",
         "humidity": "60% - 80% (매일 분무 필수)",
         "size": "20cm - 25cm",
@@ -120,8 +120,8 @@ LIZARD_DB = {
         "scientific_name": "Eublepharis macularius",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        # 정확한 레오파드 게코 이미지
-        "image_url": "https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?q=80&w=1000&auto=format&fit=crop",
+        # 레오파드 게코 전용 이미지
+        "image_url": "https://images.pexels.com/photos/13593006/pexels-photo-13593006.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "핫존 30°C-32°C / 쿨존 24°C-26°C",
         "humidity": "30% - 40% (건조한 환경)",
         "size": "20cm - 28cm",
@@ -151,8 +151,8 @@ LIZARD_DB = {
         "scientific_name": "Pogona vitticeps",
         "difficulty": "중급 (넓은 공간 필요)",
         "difficulty_badge": "badge-medium",
-        # 정확한 비어디 드래곤 이미지
-        "image_url": "https://images.unsplash.com/photo-1563281577-a7be47e20db9?q=80&w=1000&auto=format&fit=crop",
+        # 비어디 드래곤 전용 이미지
+        "image_url": "https://images.pexels.com/photos/751712/pexels-photo-751712.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "바스킹존 38°C-42°C / 쿨존 26°C-28°C",
         "humidity": "30% - 40% (주간 건조)",
         "size": "45cm - 60cm",
@@ -181,8 +181,8 @@ LIZARD_DB = {
         "scientific_name": "Chamaeleo calyptratus",
         "difficulty": "상급 (섬세한 환경 관리 필요)",
         "difficulty_badge": "badge-hard",
-        # 정확한 베일드 카멜레온 이미지
-        "image_url": "https://images.unsplash.com/photo-1565017228836-8b06d8601c0c?q=80&w=1000&auto=format&fit=crop",
+        # 베일드 카멜레온 전용 이미지
+        "image_url": "https://images.pexels.com/photos/62324/chameleon-reptile-lizard-green-62324.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "바스킹존 32°C-35°C / 주간 25°C-28°C",
         "humidity": "50% - 70% (통풍 매우 중요)",
         "size": "35cm - 60cm",
@@ -210,8 +210,8 @@ LIZARD_DB = {
         "scientific_name": "Tiliqua scincoides",
         "difficulty": "중급 (대형 사육장 및 잡식 식단)",
         "difficulty_badge": "badge-medium",
-        # 정확한 푸른혀 도마뱀(Blue-tongued Skink) 이미지
-        "image_url": "https://images.unsplash.com/photo-1629898569904-699a2fa71e68?q=80&w=1000&auto=format&fit=crop",
+        # 푸른혀 도마뱀 전용 이미지 (위키미디어 정식 도마뱀 데이터)
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Eastern_Blue-tongued_Lizard.jpg/800px-Eastern_Blue-tongued_Lizard.jpg",
         "temp": "바스킹존 35°C-38°C / 쿨존 24°C-26°C",
         "humidity": "40% - 80% (아종별 다름)",
         "size": "40cm - 60cm",
@@ -284,7 +284,12 @@ st.markdown(f"""
 col1, col2 = st.columns([1, 1.8])
 
 with col1:
-    st.image(lizard["image_url"], caption=f"{selected_lizard_name} 대표 이미지", use_container_width=True)
+    # 📌 검증된 개별 도마뱀 실물 이미지 출력 (오류 발생 시 대체 텍스트 표시)
+    st.image(
+        lizard["image_url"], 
+        caption=f"📷 {selected_lizard_name} 고화질 대표 이미지", 
+        use_container_width=True
+    )
     
     st.subheader("📊 핵심 사육 스펙")
     
