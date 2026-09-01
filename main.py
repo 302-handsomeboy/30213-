@@ -8,16 +8,13 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS 스타일링 Injection
+# Custom CSS 스타일링
 st.markdown("""
 <style>
-    /* 메인 배경 및 폰트 설정 */
     .main {
         background-color: #0f172a;
         color: #f8fafc;
     }
-    
-    /* 헤더 카드 스타일 */
     .header-card {
         background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         border: 1px solid #334155;
@@ -26,8 +23,6 @@ st.markdown("""
         margin-bottom: 20px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
-    
-    /* 난이도 배지 */
     .badge-easy {
         background-color: #059669;
         color: white;
@@ -52,8 +47,6 @@ st.markdown("""
         font-size: 14px;
         font-weight: bold;
     }
-
-    /* 통계/정보 카드 */
     .stat-card {
         background-color: #1e293b;
         border-left: 4px solid #3b82f6;
@@ -72,8 +65,6 @@ st.markdown("""
         font-weight: bold;
         color: #f8fafc;
     }
-
-    /* 탭 스타일 조정 */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
@@ -91,14 +82,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 2. 도마뱀 데이터베이스 구축
+# 2. 도마뱀 데이터베이스 구축 (정확한 이미지 URL 반영)
 LIZARD_DB = {
     "크레스티드 게코": {
         "en_name": "Crested Gecko",
         "scientific_name": "Correlophus ciliatus",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        "image_url": "https://images.unsplash.com/photo-1596727147705-61a532a659bd?q=80&w=1000&auto=format&fit=crop",
+        # 정확한 크레스티드 게코 이미지
+        "image_url": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1000&auto=format&fit=crop",
         "temp": "22°C - 26°C (실온 사육 가능)",
         "humidity": "60% - 80% (매일 분무 필수)",
         "size": "20cm - 25cm",
@@ -128,7 +120,8 @@ LIZARD_DB = {
         "scientific_name": "Eublepharis macularius",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        "image_url": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=1000&auto=format&fit=crop",
+        # 정확한 레오파드 게코 이미지
+        "image_url": "https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?q=80&w=1000&auto=format&fit=crop",
         "temp": "핫존 30°C-32°C / 쿨존 24°C-26°C",
         "humidity": "30% - 40% (건조한 환경)",
         "size": "20cm - 28cm",
@@ -158,7 +151,8 @@ LIZARD_DB = {
         "scientific_name": "Pogona vitticeps",
         "difficulty": "중급 (넓은 공간 필요)",
         "difficulty_badge": "badge-medium",
-        "image_url": "https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1000&auto=format&fit=crop",
+        # 정확한 비어디 드래곤 이미지
+        "image_url": "https://images.unsplash.com/photo-1563281577-a7be47e20db9?q=80&w=1000&auto=format&fit=crop",
         "temp": "바스킹존 38°C-42°C / 쿨존 26°C-28°C",
         "humidity": "30% - 40% (주간 건조)",
         "size": "45cm - 60cm",
@@ -187,7 +181,8 @@ LIZARD_DB = {
         "scientific_name": "Chamaeleo calyptratus",
         "difficulty": "상급 (섬세한 환경 관리 필요)",
         "difficulty_badge": "badge-hard",
-        "image_url": "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?q=80&w=1000&auto=format&fit=crop",
+        # 정확한 베일드 카멜레온 이미지
+        "image_url": "https://images.unsplash.com/photo-1565017228836-8b06d8601c0c?q=80&w=1000&auto=format&fit=crop",
         "temp": "바스킹존 32°C-35°C / 주간 25°C-28°C",
         "humidity": "50% - 70% (통풍 매우 중요)",
         "size": "35cm - 60cm",
@@ -215,7 +210,8 @@ LIZARD_DB = {
         "scientific_name": "Tiliqua scincoides",
         "difficulty": "중급 (대형 사육장 및 잡식 식단)",
         "difficulty_badge": "badge-medium",
-        "image_url": "https://images.unsplash.com/photo-1533518463841-d62e1fc91373?q=80&w=1000&auto=format&fit=crop",
+        # 정확한 푸른혀 도마뱀(Blue-tongued Skink) 이미지
+        "image_url": "https://images.unsplash.com/photo-1629898569904-699a2fa71e68?q=80&w=1000&auto=format&fit=crop",
         "temp": "바스킹존 35°C-38°C / 쿨존 24°C-26°C",
         "humidity": "40% - 80% (아종별 다름)",
         "size": "40cm - 60cm",
@@ -270,7 +266,6 @@ with st.sidebar:
 lizard = LIZARD_DB[selected_lizard_name]
 
 # 4. 메인 화면 구성
-# 상단 타이틀 영역
 st.markdown(f"""
 <div class="header-card">
     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -285,16 +280,14 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# 메인 콘텐츠 컬럼 (왼쪽: 사진 및 핵심 스펙, 오른쪽: 상세 정보 탭)
+# 메인 콘텐츠 컬럼
 col1, col2 = st.columns([1, 1.8])
 
 with col1:
-    # 도마뱀 고화질 사진
     st.image(lizard["image_url"], caption=f"{selected_lizard_name} 대표 이미지", use_container_width=True)
     
     st.subheader("📊 핵심 사육 스펙")
     
-    # 4가지 핵심 요약 카드
     st.markdown(f"""
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
         <div class="stat-card">
@@ -319,14 +312,12 @@ with col1:
     st.info(f"**🥩 먹이 유형**: {lizard['diet_type']}\n\n**🏠 권장 사육장**: {lizard['cage_size']}")
 
 with col2:
-    # 상세 가이드 탭
     tab1, tab2, tab3, tab4 = st.tabs(["🏠 사육 환경", "🥗 먹이 & 영양", "💡 사육 팁 & 노하우", "🧮 시뮬레이터"])
     
     with tab1:
         st.subheader("🏠 사육장 세팅 및 환경 관리")
         st.markdown(lizard["env_info"])
         
-        # 실내 온습도 진단 인터랙티브 툴
         st.divider()
         st.subheader("🌡️ 현재 우리집 환경 적합도 테스트")
         room_temp = st.slider("현재 실내 온도 (°C)", 15, 35, 24)
@@ -372,6 +363,5 @@ with col2:
         else:
             st.info("종별 특성에 맞는 식단표를 참고하여 곤충과 야채 비율을 맞춰주세요.")
 
-# 푸터 영역
 st.divider()
-st.caption("Disclaimer: 본 사육 가이드는 일반적인 권장 사항이며, 개체별 건강 상태 및 환경에 따라 차이가 있을 수 있습니다. 이상 증세 발생 시 특수동물 전문 병원에 방문하세요.")
+st.caption("Disclaimer: 본 사육 가이드는 일반적인 권장 사항이며, 개체별 건강 상태 및 환경에 따라 차이가 있을 수 있습니다.")
