@@ -61,9 +61,17 @@ st.markdown("""
         letter-spacing: 0.05em;
     }
     .stat-value {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         color: #f8fafc;
+    }
+    .icon-box {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 20px;
     }
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
@@ -82,15 +90,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 2. 도마뱀 데이터베이스 구축 (검증된 개별 도마뱀 이미지 주소 업데이트)
+# 2. 도마뱀 데이터베이스 구축 (이미지 링크 완전 제거)
 LIZARD_DB = {
     "크레스티드 게코": {
         "en_name": "Crested Gecko",
         "scientific_name": "Correlophus ciliatus",
+        "icon": "🦎",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        # 크레스티드 게코 전용 이미지
-        "image_url": "https://images.pexels.com/photos/16147779/pexels-photo-16147779/free-photo-of-crested-gecko.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "22°C - 26°C (실온 사육 가능)",
         "humidity": "60% - 80% (매일 분무 필수)",
         "size": "20cm - 25cm",
@@ -118,10 +125,9 @@ LIZARD_DB = {
     "레오파드 게코": {
         "en_name": "Leopard Gecko",
         "scientific_name": "Eublepharis macularius",
+        "icon": "🐆",
         "difficulty": "초급 (입문용 추천)",
         "difficulty_badge": "badge-easy",
-        # 레오파드 게코 전용 이미지
-        "image_url": "https://images.pexels.com/photos/13593006/pexels-photo-13593006.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "핫존 30°C-32°C / 쿨존 24°C-26°C",
         "humidity": "30% - 40% (건조한 환경)",
         "size": "20cm - 28cm",
@@ -149,10 +155,9 @@ LIZARD_DB = {
     "비어디 드래곤": {
         "en_name": "Bearded Dragon",
         "scientific_name": "Pogona vitticeps",
+        "icon": "🐉",
         "difficulty": "중급 (넓은 공간 필요)",
         "difficulty_badge": "badge-medium",
-        # 비어디 드래곤 전용 이미지
-        "image_url": "https://images.pexels.com/photos/751712/pexels-photo-751712.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "바스킹존 38°C-42°C / 쿨존 26°C-28°C",
         "humidity": "30% - 40% (주간 건조)",
         "size": "45cm - 60cm",
@@ -179,10 +184,9 @@ LIZARD_DB = {
     "베일드 카멜레온": {
         "en_name": "Veiled Chameleon",
         "scientific_name": "Chamaeleo calyptratus",
+        "icon": "🦎",
         "difficulty": "상급 (섬세한 환경 관리 필요)",
         "difficulty_badge": "badge-hard",
-        # 베일드 카멜레온 전용 이미지
-        "image_url": "https://images.pexels.com/photos/62324/chameleon-reptile-lizard-green-62324.jpeg?auto=compress&cs=tinysrgb&w=800",
         "temp": "바스킹존 32°C-35°C / 주간 25°C-28°C",
         "humidity": "50% - 70% (통풍 매우 중요)",
         "size": "35cm - 60cm",
@@ -208,10 +212,9 @@ LIZARD_DB = {
     "푸른혀 도마뱀": {
         "en_name": "Blue-tongued Skink",
         "scientific_name": "Tiliqua scincoides",
+        "icon": "👅",
         "difficulty": "중급 (대형 사육장 및 잡식 식단)",
         "difficulty_badge": "badge-medium",
-        # 푸른혀 도마뱀 전용 이미지 (위키미디어 정식 도마뱀 데이터)
-        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Eastern_Blue-tongued_Lizard.jpg/800px-Eastern_Blue-tongued_Lizard.jpg",
         "temp": "바스킹존 35°C-38°C / 쿨존 24°C-26°C",
         "humidity": "40% - 80% (아종별 다름)",
         "size": "40cm - 60cm",
@@ -238,7 +241,6 @@ LIZARD_DB = {
 
 # 3. 사이드바 - 도마뱀 선택 메뉴
 with st.sidebar:
-    st.image("https://cdn-icons-png.flaticon.com/512/2826/2826848.png", width=80)
     st.title("🦎 도마뱀 선택")
     st.caption("반려 도마뱀을 선택하여 상세 사육 가이드를 확인하세요.")
     
@@ -271,7 +273,7 @@ st.markdown(f"""
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
             <span class="{lizard['difficulty_badge']}">{lizard['difficulty']}</span>
-            <h1 style="margin: 10px 0 5px 0; color: #f8fafc; font-size: 38px;">{selected_lizard_name}</h1>
+            <h1 style="margin: 10px 0 5px 0; color: #f8fafc; font-size: 38px;">{lizard['icon']} {selected_lizard_name}</h1>
             <p style="color: #94a3b8; font-style: italic; margin: 0;">{lizard['en_name']} ({lizard['scientific_name']})</p>
         </div>
     </div>
@@ -284,12 +286,14 @@ st.markdown(f"""
 col1, col2 = st.columns([1, 1.8])
 
 with col1:
-    # 📌 검증된 개별 도마뱀 실물 이미지 출력 (오류 발생 시 대체 텍스트 표시)
-    st.image(
-        lizard["image_url"], 
-        caption=f"📷 {selected_lizard_name} 고화질 대표 이미지", 
-        use_container_width=True
-    )
+    # 아이콘 비주얼 카드 영역 (대표 사진 대신 위치)
+    st.markdown(f"""
+    <div class="icon-box">
+        <div style="font-size: 80px; margin-bottom: 10px;">{lizard['icon']}</div>
+        <div style="font-size: 20px; font-weight: bold; color: #f8fafc;">{selected_lizard_name}</div>
+        <div style="font-size: 13px; color: #94a3b8; margin-top: 5px;">{lizard['en_name']}</div>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.subheader("📊 핵심 사육 스펙")
     
@@ -297,19 +301,19 @@ with col1:
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
         <div class="stat-card">
             <div class="stat-title">🌡️ 적정 온도</div>
-            <div class="stat-value" style="font-size: 15px;">{lizard['temp']}</div>
+            <div class="stat-value">{lizard['temp']}</div>
         </div>
         <div class="stat-card">
             <div class="stat-title">💧 적정 습도</div>
-            <div class="stat-value" style="font-size: 15px;">{lizard['humidity']}</div>
+            <div class="stat-value">{lizard['humidity']}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-title">📏 평균 성체 크기</div>
-            <div class="stat-value" style="font-size: 15px;">{lizard['size']}</div>
+            <div class="stat-title">📏 평균 크기</div>
+            <div class="stat-value">{lizard['size']}</div>
         </div>
         <div class="stat-card">
             <div class="stat-title">⏳ 평균 수명</div>
-            <div class="stat-value" style="font-size: 15px;">{lizard['lifespan']}</div>
+            <div class="stat-value">{lizard['lifespan']}</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
