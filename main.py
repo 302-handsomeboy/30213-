@@ -1,8 +1,9 @@
+
 import streamlit as st
 
 # 1. 페이지 기본 설정 및 디자인 스타일 적용
 st.set_page_config(
-    page_title="🦎 파충류 백과사전 - 도마뱀 사육 가이드",
+    page_title="🦎 파충류 백과사전 - 추천 입문 가이드",
     page_icon="🦎",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -61,7 +62,7 @@ st.markdown("""
         letter-spacing: 0.05em;
     }
     .stat-value {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: bold;
         color: #f8fafc;
     }
@@ -69,7 +70,7 @@ st.markdown("""
         background-color: #1e293b;
         border: 1px solid #334155;
         border-radius: 16px;
-        padding: 30px;
+        padding: 24px;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -90,163 +91,254 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 2. 도마뱀 데이터베이스 구축 (이미지 링크 완전 제거)
-LIZARD_DB = {
+# 2. 파충류 10종 데이터베이스 구축 (분양가 추가)
+REPTILE_DB = {
     "크레스티드 게코": {
+        "category": "도마뱀",
         "en_name": "Crested Gecko",
         "scientific_name": "Correlophus ciliatus",
         "icon": "🦎",
-        "difficulty": "초급 (입문용 추천)",
+        "difficulty": "초급 (입문용 강추)",
         "difficulty_badge": "badge-easy",
-        "temp": "22°C - 26°C (실온 사육 가능)",
-        "humidity": "60% - 80% (매일 분무 필수)",
+        "price": "5만 ~ 20만원 (노멀 기준)",
+        "temp": "22°C - 26°C",
+        "humidity": "60% - 80%",
         "size": "20cm - 25cm",
         "lifespan": "15년 - 20년",
-        "diet_type": "잡식 (슈퍼푸드 사료 위주 + 귀뚜라미)",
-        "cage_size": "30x30x45cm 이상 (높이형 사육장)",
-        "summary": "속눈썹 같은 벼슬이 매력적인 뉴칼레도니아 출신 게코입니다. 귀뚜라미 생먹이 없이 전용 슈퍼푸드(가루 사료)만으로도 건강하게 키울 수 있어 파충류 입문자에게 가장 인기 있는 종입니다.",
+        "diet_type": "잡식 (슈퍼푸드 가루 사료 위주)",
+        "cage_size": "30x30x45cm (높이형)",
+        "summary": "곤충 생먹이 없이 가루 사료(슈퍼푸드)만으로 키울 수 있는 최고의 입문 도마뱀입니다. 상온 사육이 가능해 별도 온열 장치가 크게 필요 없습니다.",
         "env_info": """
-        - **사육장 형태**: 나무를 타는 습성이 있으므로 **세로로 높은 사육장(높이형)**을 준비해야 합니다.
-        - **온도 관리**: 고온에 매우 취약합니다. **28°C 이상 올라가지 않도록** 여름철 냉방 관리가 중요합니다.
-        - **바닥재**: 키친타올(청결성 추천), 코코피트, 또는 활성탄/에코어스.
-        - **구조물**: 덩굴, 유목, 인조 잎사귀 등 은신처와 등반용 구조물을 빽빽하게 채워주세요.
+        - **사육장**: 나무를 타는 붙붙이 게코이므로 **세로로 높은 사육장**이 필요합니다.
+        - **온도 관리**: 고온에 약하므로 **28°C 이상 올라가지 않도록** 유의하세요.
+        - **구조물**: 덩굴, 유목, 인조 잎사귀 등 은신처와 이동 통로를 빽빽하게 구성해주세요.
         """,
         "diet_info": """
-        - **주식**: 크레스티드 게코 전용 슈퍼푸드 (판게아, 레파시 등)를 물에 개어 격일로 급여.
-        - **간식/특식**: 주 1회 기생충 위험이 없는 인공 번식 칼슘 처리 귀뚜라미/밀웜 급여.
-        - **영양제**: 슈퍼푸드에 영양소가 포함되어 있으나, 생먹이 급여 시 **칼슘제(D3 포함)** 분말을 묻혀서 급여.
+        - **주식**: 크레스티드 게코 전용 슈퍼푸드를 물에 타서 격일로 급여합니다.
+        - **특식**: 주 1회 칼슘 처리된 귀뚜라미를 주면 성장 속도가 빨라집니다.
         """,
-        "tips": [
-            "꼬리가 떨어지면 다시 자라지 않으므로 핸들링 시 꼬리를 세게 잡지 마세요.",
-            "야행성이므로 낮에는 어두운 은신처에서 자고 저녁부터 활동합니다.",
-            "물그릇 외에도 벽면에 미스트로 분무된 물방울을 핥아 먹는 것을 좋아합니다."
-        ]
+        "tips": ["꼬리가 잘리면 다시 자라지 않으므로 과도한 핸들링은 자제하세요.", "저녁 시간에 벽면에 물을 분무해주면 물방울을 핥아 마십니다."]
     },
     "레오파드 게코": {
+        "category": "도마뱀",
         "en_name": "Leopard Gecko",
         "scientific_name": "Eublepharis macularius",
         "icon": "🐆",
-        "difficulty": "초급 (입문용 추천)",
+        "difficulty": "초급 (입문용 강추)",
         "difficulty_badge": "badge-easy",
+        "price": "4만 ~ 15만원 (노멀 기준)",
         "temp": "핫존 30°C-32°C / 쿨존 24°C-26°C",
-        "humidity": "30% - 40% (건조한 환경)",
+        "humidity": "30% - 40%",
         "size": "20cm - 28cm",
         "lifespan": "15년 - 20년",
         "diet_type": "육식 (귀뚜라미, 밀웜 등 생먹이)",
-        "cage_size": "45x30x30cm 이상 (가로형 사육장)",
-        "summary": "표범 무늬와 통통한 꼬리가 매력적인 지상성 게코입니다. 순한 성격과 귀여운 눈망울, 다양한 모프(색상/패턴)로 오랜 기간 사랑받아 온 대표적 입문 파충류입니다.",
+        "cage_size": "45x30x30cm (가로형)",
+        "summary": "통통한 꼬리와 웃는 듯한 귀여운 얼굴이 특징인 지상성 도마뱀입니다. 순한 성격으로 핸들링이 쉽습니다.",
         "env_info": """
-        - **사육장 형태**: 바닥에서 생활하므로 **가로로 넓은 사육장**이 필요합니다.
-        - **열원(필수)**: 사육장 바닥 일부(약 1/3)에 **필름히터/하부장판**을 설치하여 복부 열원을 제공해야 합니다.
-        - **은신처**: 건식 은신처와 탈피를 돕기 위한 **습식 은신처(습한 습지/키친타올)**를 함께 제공하세요.
-        - **바닥재**: 키친타올, 파충류 전용 매트 (임팩션 방지를 위해 어린 개체는 샌드 금지).
+        - **열원 필수**: 바닥 1/3 영역에 **하부 장판/필름히터**를 까는 것이 필수입니다.
+        - **은신처**: 건식 은신처와 탈피를 돕는 **습식 은신처**를 모두 마련해주세요.
         """,
         "diet_info": """
-        - **주식**: 살아있는 귀뚜라미, 밀웜, 두비아 로치.
-        - **급여 주기**: 베이비(매일), 성체(2~3일에 1회).
-        - **칼슘제 필수**: 칼슘 부족 시 MBD(뼈 질환)가 발생하므로, 생먹이에 **D3 함유 칼슘 가루를 묻혀(더스팅)** 급여하세요.
+        - **주식**: 귀뚜라미 또는 밀웜.
+        - **필수 영양제**: 뼈 질환(MBD) 예방을 위해 먹이에 **D3 칼슘 가루**를 반드시 묻혀서 급여하세요.
         """,
-        "tips": [
-            "영양 상태는 꼬리의 두께로 알 수 있습니다. 통통한 꼬리가 건강의 상징입니다.",
-            "눈꺼풀이 있어 눈을 감고 자는 몇 안 되는 게코 중 하나입니다.",
-            "핸들링이 매우 쉽지만 느닷없이 이동할 수 있으니 높은 곳에서 떨어지지 않도록 주의하세요."
-        ]
+        "tips": ["통통한 꼬리는 영양 저장소입니다.", "눈꺼풀이 있어 눈을 끔뻑이는 귀여운 모습을 볼 수 있습니다."]
     },
     "비어디 드래곤": {
+        "category": "도마뱀",
         "en_name": "Bearded Dragon",
         "scientific_name": "Pogona vitticeps",
         "icon": "🐉",
-        "difficulty": "중급 (넓은 공간 필요)",
+        "difficulty": "중급 (공간/장비 필요)",
         "difficulty_badge": "badge-medium",
+        "price": "10만 ~ 30만원",
         "temp": "바스킹존 38°C-42°C / 쿨존 26°C-28°C",
-        "humidity": "30% - 40% (주간 건조)",
+        "humidity": "30% - 40%",
         "size": "45cm - 60cm",
         "lifespan": "10년 - 15년",
-        "diet_type": "잡식 (성체는 채식 위주 / 어린개체는 육식 위주)",
-        "cage_size": "120x60x60cm (3자~4자 이상 대형 사육장)",
-        "summary": "턱 밑의 가시 모양 벼슬과 주름이 마치 용을 닮은 주행성 도마뱀입니다. 교감이 잘 되며 주인 알아보는 파충류로 유명하지만, 대형 사육장과 강력한 UVB 조명이 필수적입니다.",
+        "diet_type": "잡식 (성체는 채식 위주)",
+        "cage_size": "120x60x60cm (4자 대형)",
+        "summary": "주인 알아보는 도마뱀으로 불릴 만큼 온순하고 교감이 잘 됩니다. 다만 커다란 사육장과 강력한 조명 장비가 필요합니다.",
         "env_info": """
-        - **사육장**: 성체 기준 최소 3자(90cm) ~ 4자(120cm) 이상의 원목/스팟 사육장이 필요합니다.
-        - **조명 필수**: **주행성**이므로 고출력 **UVB 램프**와 일광욕용 **스팟 램프**가 매일 10~12시간 켜져 있어야 합니다.
-        - **바닥재**: 바크, 호주 사막 샌드, 타일 또는 키친타올.
+        - **조명 필수**: 주행성이므로 **UVB 램프**와 일광욕용 **스팟 램프**를 매일 10~12시간 켜주어야 합니다.
         """,
         "diet_info": """
-        - **베이비/유체**: 곤충 70% + 야채 30% (귀뚜라미, 듀비아를 매일 먹임).
-        - **성체**: 야채 70% + 곤충 30% (치커리, 청경채, 단호박 등 신선한 야채 위주).
-        - **주의**: 시금치, 락토스 성분이 있는 음식, 방울토마토 등은 중독 증상을 일으킬 수 있으니 피하세요.
+        - **어린 개체**: 곤충 70% + 야채 30%
+        - **성체 개체**: 야채 70% (청경채, 치커리 등) + 곤충 30%
         """,
-        "tips": [
-            "기분이 좋지 않거나 위협을 느끼면 턱을 검게 부풀려 '비어드(수염)'를 만듭니다.",
-            "손을 동그랗게 돌리는 '암 웨이빙(Arm Waving)'은 복종이나 인사의 표현입니다.",
-            "주기적인 온수욕(족욕)은 배변 유도와 탈피에 큰 도움이 됩니다."
-        ]
+        "tips": ["손을 동그랗게 돌리는 암 웨이빙(Arm Waving) 행동은 인사나 복종의 의미입니다."]
+    },
+    "사바나 모니터": {
+        "category": "도마뱀",
+        "en_name": "Savannah Monitor",
+        "scientific_name": "Varanus exanthematicus",
+        "icon": "🐊",
+        "difficulty": "중상급 (대형종)",
+        "difficulty_badge": "badge-hard",
+        "price": "8만 ~ 20만원",
+        "temp": "바스킹존 45°C 이상 / 쿨존 28°C",
+        "humidity": "40% - 60%",
+        "size": "80cm - 120cm",
+        "lifespan": "10년 - 15년",
+        "diet_type": "육식 (곤충, 쥐, 메추리)",
+        "cage_size": "150x75x75cm 이상",
+        "summary": "소형 공룡을 연상시키는 왕도마뱀 계열입니다. 순들순들하게 길들일 수 있지만 크기가 크게 자라므로 충분한 공간 확보가 필수입니다.",
+        "env_info": """
+        - **땅파기 습성**: 흙이나 흙 혼합 바닥재를 두껍게 깔아주는 것이 좋습니다.
+        """,
+        "diet_info": """
+        - 야생에서는 곤충 위주로 먹으나 사육 시 쥐, 귀뚜라미, 냉동 닭 등을 급여합니다. (비만 주의)
+        """,
+        "tips": ["어릴 때부터 지속적인 핸들링을 통해 길들여야 성체가 되어서도 온순합니다."]
+    },
+    "무어리시 게코": {
+        "category": "도마뱀",
+        "en_name": "Moorish Gecko",
+        "scientific_name": "Tarentola mauritanica",
+        "icon": "🦎",
+        "difficulty": "초급",
+        "difficulty_badge": "badge-easy",
+        "price": "3만 ~ 7만원",
+        "temp": "26°C - 30°C",
+        "humidity": "40% - 50%",
+        "size": "12cm - 15cm",
+        "lifespan": "10년 - 15년",
+        "diet_type": "육식 (소형 곤충)",
+        "cage_size": "30x30x30cm",
+        "summary": "악어 같은 입체적 비늘 표면을 가진 소형 벽면 부착성 게코입니다. 입문용으로 분양가가 매우 저렴하고 사육이 쉽습니다.",
+        "env_info": """
+        - 벽에 잘 붙으므로 코르크 보드나 코코넛 은신처를 벽면에 배치해주세요.
+        """,
+        "diet_info": """
+        - 소형 귀뚜라미나 밀웜에 칼슘 파우더를 묻혀 급여합니다.
+        """,
+        "tips": ["빠르고 소심하므로 관상용으로 키우는 것을 추천합니다."]
     },
     "베일드 카멜레온": {
+        "category": "도마뱀",
         "en_name": "Veiled Chameleon",
         "scientific_name": "Chamaeleo calyptratus",
         "icon": "🦎",
-        "difficulty": "상급 (섬세한 환경 관리 필요)",
+        "difficulty": "상급 (섬세한 관리)",
         "difficulty_badge": "badge-hard",
-        "temp": "바스킹존 32°C-35°C / 주간 25°C-28°C",
-        "humidity": "50% - 70% (통풍 매우 중요)",
-        "size": "35cm - 60cm",
+        "price": "10만 ~ 25만원",
+        "temp": "25°C - 28°C (바스킹 33°C)",
+        "humidity": "50% - 70% (통풍 필수)",
+        "size": "35cm - 50cm",
         "lifespan": "5년 - 8년",
-        "diet_type": "육식 (귀뚜라미, 밀웜 등 움직이는 곤충)",
-        "cage_size": "60x60x120cm 이상 (망 사육장 추천)",
-        "summary": "머리 위 투구 모양(투구/베일)과 신비로운 색상 변화, 긴 혀로 곤충을 사냥하는 모습이 예술적인 파충류입니다. 통풍 문제와 스트레스에 민감하여 섬세한 사육 환경 구축이 필요합니다.",
+        "diet_type": "육식 (움직이는 곤충)",
+        "cage_size": "60x60x120cm (망 사육장)",
+        "summary": "머리 위 높은 투구와 360도 따로 움직이는 눈, 긴 혀가 매력적인 파충류입니다. 환기가 잘 안 되면 병에 걸리기 쉽습니다.",
         "env_info": """
-        - **사육장**: 밀폐된 유리장보다는 **매쉬(망)로 된 통풍이 원활한 높이형 사육장**이 좋습니다.
-        - **수분 공급**: 고인 물을 마시지 않습니다. **드립시스템(물방울 떨어지는 장치)**이나 자동 미스팅기로 나뭇잎에 맺힌 물을 마시게 해야 합니다.
-        - **조명**: 강한 UVB 램프와 열원이 필수적입니다.
+        - 밀폐 유리장 대신 **망(Mesh) 사육장**을 사용하는 것이 환기에 좋습니다.
         """,
         "diet_info": """
-        - 살아있는 귀뚜라미, 왁스웜, 밀웜 등 다양하고 활동적인 곤충 급여.
-        - 비타민과 칼슘 가루를 매주 정기적으로 더스팅하여 영양 결핍 예방.
+        - 고인 물을 먹지 않으므로 나뭇잎에 떨어지는 물방울(드립 시스템/미스팅)을 마시게 해야 합니다.
         """,
-        "tips": [
-            "스트레스에 매우 약하므로 과도한 핸들링은 피하는 것이 좋습니다.",
-            "독립성이 강해 한 사육장에 두 마리 이상 합사하면 서로 공격합니다.",
-            "눈이 360도 각각 따로 움직이며 사냥감을 입체적으로 포착합니다."
-        ]
+        "tips": ["핸들링 스트레스가 크므로 관상 위주 사육을 권장합니다."]
     },
     "푸른혀 도마뱀": {
+        "category": "도마뱀",
         "en_name": "Blue-tongued Skink",
         "scientific_name": "Tiliqua scincoides",
         "icon": "👅",
-        "difficulty": "중급 (대형 사육장 및 잡식 식단)",
+        "difficulty": "중급",
         "difficulty_badge": "badge-medium",
-        "temp": "바스킹존 35°C-38°C / 쿨존 24°C-26°C",
-        "humidity": "40% - 80% (아종별 다름)",
+        "price": "25만 ~ 50만원",
+        "temp": "바스킹존 35°C / 쿨존 25°C",
+        "humidity": "40% - 60%",
         "size": "40cm - 60cm",
-        "lifespan": "15년 - 20년 이상",
-        "diet_type": "잡식 (고기, 야채, 과일, 곤충 등)",
-        "cage_size": "120x60x45cm 이상 (넓은 가로형)",
-        "summary": "선명한 파란색 혀와 통통한 소시지 같은 몸매가 특징인 스킨크입니다. 사람에게 순종적이고 온순하며 무엇이든 잘 먹어 인기 있는 대형 게코/스킨크류입니다.",
+        "lifespan": "15년 - 20년",
+        "diet_type": "잡식 (고기, 야채, 과일 등)",
+        "cage_size": "120x60x45cm",
+        "summary": "파란색 혀가 인상적이며 통통한 소시지 몸매를 자랑합니다. 무엇이든 잘 먹고 순해서 매니아층이 두껍습니다.",
         "env_info": """
-        - **사육장**: 몸이 길고 지상성이므로 넓고 긴 사육장을 준비해야 합니다.
-        - **바닥재**: 땅을 파는 습성(Burrowing)이 있으므로 코코칩이나 버크를 두껍게 깔아주세요.
-        - **조명**: 주행성이므로 UVB 램프와 바스킹 스팟 램프가 필수입니다.
+        - 땅을 파는 습성이 있으므로 코코칩이나 바크를 두껍게 깔아주세요.
         """,
         "diet_info": """
-        - **식단 비중**: 단백질 50% (습식 강아지/고양이 사료, 곤충) + 야채 40% + 과일 10%.
-        - 영양 밸런스가 뛰어나 먹이 관리가 비교적 재미있습니다.
+        - 강아지 습식 사료, 야채 다진 것, 곤충 등을 섞어주면 아주 잘 먹습니다.
         """,
-        "tips": [
-            "위협을 느끼면 입을 크게 벌리고 파란 혀를 내밀어 포식자를 놀라게 합니다.",
-            "잡식성이어서 고급 습식 사료와 야채 다진 것을 잘 먹습니다.",
-            "탈피할 때 손가락, 발가락 끝 탈피껍질이 잘 빠지는지 확인해 주세요."
-        ]
+        "tips": ["위협을 느끼면 푸른 혀를 내밀며 쉭쉭 소리를 냅니다."]
+    },
+    "콘스네이크": {
+        "category": "뱀",
+        "en_name": "Corn Snake",
+        "scientific_name": "Pantherophis guttatus",
+        "icon": "🐍",
+        "difficulty": "초급 (뱀 입문 최강)",
+        "difficulty_badge": "badge-easy",
+        "price": "8만 ~ 20만원",
+        "temp": "25°C - 29°C",
+        "humidity": "40% - 50%",
+        "size": "120cm - 150cm (슬림함)",
+        "lifespan": "15년 - 20년",
+        "diet_type": "육식 (해동 냉동 쥐)",
+        "cage_size": "90x45x45cm",
+        "summary": "뱀 입문자에게 가장 추천하는 종입니다. 온순한 성격, 화려한 색상, 1주일에 1번만 먹이를 주면 되는 쉬운 관리가 장점입니다.",
+        "env_info": """
+        - 탈출 명수이므로 **사육장 잠금장치**가 완벽해야 합니다.
+        """,
+        "diet_info": """
+        - 5~7일에 1회 따뜻한 물에 해동한 냉동 쥐를 급여합니다.
+        """,
+        "tips": ["먹이를 먹은 직후 2~3일간은 거식이나 토함을 방지하기 위해 핸들링을 금지하세요."]
+    },
+    "볼파이톤": {
+        "category": "뱀",
+        "en_name": "Ball Python",
+        "scientific_name": "Python regius",
+        "icon": "🐍",
+        "difficulty": "초중급",
+        "difficulty_badge": "badge-medium",
+        "price": "10만 ~ 30만원 (기본 모프)",
+        "temp": "핫존 31°C - 33°C / 쿨존 26°C",
+        "humidity": "50% - 60%",
+        "size": "120cm - 150cm (통통함)",
+        "lifespan": "20년 - 30년",
+        "diet_type": "육식 (해동 냉동 쥐)",
+        "cage_size": "90x45x45cm",
+        "summary": "겁이 많아 위협을 느끼면 공처럼 몸을 동그랗게 말아 '볼' 파이톤이라 불립니다. 순하고 통통한 매력이 있습니다.",
+        "env_info": """
+        - 몸을 숨길 수 있는 딱 맞는 은신처를 매우 좋아합니다.
+        """,
+        "diet_info": """
+        - 주 1회 해동 쥐를 급여하며, 겨울철에 거식(먹이 거부)을 하는 경우가 종종 있습니다.
+        """,
+        "tips": ["순해서 사람을 물 가능성이 극히 낮습니다."]
+    },
+    "동부 호스필드 육지거북": {
+        "category": "거북",
+        "en_name": "Russian Tortoise",
+        "scientific_name": "Testudo horsfieldii",
+        "icon": "🐢",
+        "difficulty": "초중급 (육지거북 입문)",
+        "difficulty_badge": "badge-medium",
+        "price": "12만 ~ 25만원",
+        "temp": "바스킹존 33°C / 쿨존 25°C",
+        "humidity": "40% - 50%",
+        "size": "15cm - 22cm",
+        "lifespan": "30년 - 50년 이상",
+        "diet_type": "초식 (야채 및 건초)",
+        "cage_size": "90x60cm 이상",
+        "summary": "육지거북 중 비교적 소형으로 자라며 튼튼해서 입문용으로 인기 있습니다. 100% 채식을 합니다.",
+        "env_info": """
+        - 주행성이므로 **UVB 램프**와 스팟 램프가 필수입니다.
+        """,
+        "diet_info": """
+        - 치커리, 청경채, 치커리 등 신선한 야채에 육지거북 전용 칼슘제를 뿌려 매일 급여합니다.
+        """,
+        "tips": ["수분 보충과 배변 유도를 위해 주 2~3회 따뜻한 물로 온수욕을 시켜주세요."]
     }
 }
 
-# 3. 사이드바 - 도마뱀 선택 메뉴
+# 3. 사이드바 - 파충류 선택 메뉴
 with st.sidebar:
-    st.title("🦎 도마뱀 선택")
-    st.caption("반려 도마뱀을 선택하여 상세 사육 가이드를 확인하세요.")
+    st.title("🦎 파충류 선택 (10종)")
+    st.caption("반려 파충류를 선택하여 상세 사육 정보와 분양가를 확인하세요.")
     
-    selected_lizard_name = st.selectbox(
-        "키우고 싶은 도마뱀 종류:",
-        list(LIZARD_DB.keys())
+    selected_name = st.selectbox(
+        "키우고 싶은 파충류 종류:",
+        list(REPTILE_DB.keys())
     )
     
     st.divider()
@@ -257,28 +349,29 @@ with st.sidebar:
     c2 = st.checkbox("온습도계")
     c3 = st.checkbox("열원 (장판 or 램프)")
     c4 = st.checkbox("은신처 & 물그릇")
-    c5 = st.checkbox("전용 사료 or 생먹이")
-    c6 = st.checkbox("칼슘제 (D3 유/무)")
+    c5 = st.checkbox("전용 사료 or 생먹이/쥐")
+    c6 = st.checkbox("칼슘제 & 영양제")
     
     checked_count = sum([c1, c2, c3, c4, c5, c6])
     st.progress(checked_count / 6)
     st.caption(f"준비 완료: {checked_count} / 6 항목")
 
-# 선택된 도마뱀 데이터 가져오기
-lizard = LIZARD_DB[selected_lizard_name]
+# 선택된 파충류 데이터 가져오기
+reptile = REPTILE_DB[selected_name]
 
 # 4. 메인 화면 구성
 st.markdown(f"""
 <div class="header-card">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <span class="{lizard['difficulty_badge']}">{lizard['difficulty']}</span>
-            <h1 style="margin: 10px 0 5px 0; color: #f8fafc; font-size: 38px;">{lizard['icon']} {selected_lizard_name}</h1>
-            <p style="color: #94a3b8; font-style: italic; margin: 0;">{lizard['en_name']} ({lizard['scientific_name']})</p>
+            <span class="{reptile['difficulty_badge']}">{reptile['difficulty']}</span>
+            <span style="background-color: #334155; color: #f8fafc; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-left: 8px;">{reptile['category']}</span>
+            <h1 style="margin: 10px 0 5px 0; color: #f8fafc; font-size: 36px;">{reptile['icon']} {selected_name}</h1>
+            <p style="color: #94a3b8; font-style: italic; margin: 0;">{reptile['en_name']} ({reptile['scientific_name']})</p>
         </div>
     </div>
     <hr style="border-color: #334155; margin: 15px 0;">
-    <p style="font-size: 16px; line-height: 1.6; color: #cbd5e1; margin: 0;">{lizard['summary']}</p>
+    <p style="font-size: 16px; line-height: 1.6; color: #cbd5e1; margin: 0;">{reptile['summary']}</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -286,91 +379,72 @@ st.markdown(f"""
 col1, col2 = st.columns([1, 1.8])
 
 with col1:
-    # 아이콘 비주얼 카드 영역 (대표 사진 대신 위치)
+    # 비주얼 카드
     st.markdown(f"""
     <div class="icon-box">
-        <div style="font-size: 80px; margin-bottom: 10px;">{lizard['icon']}</div>
-        <div style="font-size: 20px; font-weight: bold; color: #f8fafc;">{selected_lizard_name}</div>
-        <div style="font-size: 13px; color: #94a3b8; margin-top: 5px;">{lizard['en_name']}</div>
+        <div style="font-size: 70px; margin-bottom: 5px;">{reptile['icon']}</div>
+        <div style="font-size: 20px; font-weight: bold; color: #f8fafc;">{selected_name}</div>
+        <div style="font-size: 13px; color: #94a3b8; margin-top: 2px;">{reptile['en_name']}</div>
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("📊 핵심 사육 스펙")
+    st.subheader("📊 핵심 사육 스펙 & 분양가")
     
     st.markdown(f"""
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="stat-card" style="grid-column: span 2; border-left-color: #10b981;">
+            <div class="stat-title">🏷️ 평균 분양가</div>
+            <div class="stat-value" style="color: #10b981;">{reptile['price']}</div>
+        </div>
         <div class="stat-card">
             <div class="stat-title">🌡️ 적정 온도</div>
-            <div class="stat-value">{lizard['temp']}</div>
+            <div class="stat-value">{reptile['temp']}</div>
         </div>
         <div class="stat-card">
             <div class="stat-title">💧 적정 습도</div>
-            <div class="stat-value">{lizard['humidity']}</div>
+            <div class="stat-value">{reptile['humidity']}</div>
         </div>
         <div class="stat-card">
             <div class="stat-title">📏 평균 크기</div>
-            <div class="stat-value">{lizard['size']}</div>
+            <div class="stat-value">{reptile['size']}</div>
         </div>
         <div class="stat-card">
             <div class="stat-title">⏳ 평균 수명</div>
-            <div class="stat-value">{lizard['lifespan']}</div>
+            <div class="stat-value">{reptile['lifespan']}</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    st.info(f"**🥩 먹이 유형**: {lizard['diet_type']}\n\n**🏠 권장 사육장**: {lizard['cage_size']}")
+    st.info(f"**🥩 먹이 유형**: {reptile['diet_type']}\n\n**🏠 권장 사육장**: {reptile['cage_size']}")
 
 with col2:
-    tab1, tab2, tab3, tab4 = st.tabs(["🏠 사육 환경", "🥗 먹이 & 영양", "💡 사육 팁 & 노하우", "🧮 시뮬레이터"])
+    tab1, tab2, tab3 = st.tabs(["🏠 사육 환경", "🥗 먹이 & 영양", "💡 핵심 꿀팁"])
     
     with tab1:
         st.subheader("🏠 사육장 세팅 및 환경 관리")
-        st.markdown(lizard["env_info"])
+        st.markdown(reptile["env_info"])
         
         st.divider()
         st.subheader("🌡️ 현재 우리집 환경 적합도 테스트")
         room_temp = st.slider("현재 실내 온도 (°C)", 15, 35, 24)
-        room_hum = st.slider("현재 실내 습도 (%)", 20, 90, 50)
         
         if st.button("환경 체크하기"):
-            if "22°C - 26°C" in lizard["temp"] and (20 <= room_temp <= 27):
-                st.success("✅ 현재 방 온도가 이 도마뱀에게 매우 적합합니다!")
+            if "22°C - 26°C" in reptile["temp"] and (20 <= room_temp <= 27):
+                st.success("✅ 현재 방 온도가 이 파충류에게 매우 적합합니다!")
             elif room_temp > 28:
-                st.warning("⚠️ 실내 온도가 너무 높습니다! 쿨링팬이나 에어컨 조절이 필요합니다.")
+                st.warning("⚠️ 실내 온도가 높습니다! 쿨링팬 조절이 필요할 수 있습니다.")
             else:
-                st.info("💡 추가적인 열원(하부 장판 또는 스팟 램프) 가동을 추천합니다.")
+                st.info("💡 추가적인 열원(장판/램프) 가동이 권장됩니다.")
 
     with tab2:
         st.subheader("🥗 식단 및 영양 관리")
-        st.markdown(lizard["diet_info"])
-        
-        st.warning("⚠️ **칼슘제 급여 안내**: 실내에서 사육하는 도마뱀은 칼슘 흡수를 위해 **비타민 D3가 포함된 칼슘제**를 주 1~2회 사료/생먹이에 묻혀서 주어야 MBD(대사성 뼈 질환)를 예방할 수 있습니다.")
+        st.markdown(reptile["diet_info"])
+        st.warning("⚠️ **영양제 안내**: 파충류는 실내 사육 시 칼슘 결핍(MBD)에 걸리기 쉬우므로 적절한 **칼슘 파우더 더스팅**이 필수입니다.")
 
     with tab3:
         st.subheader("💡 집사를 위한 핵심 꿀팁")
-        for i, tip in enumerate(lizard["tips"], 1):
+        for i, tip in enumerate(reptile["tips"], 1):
             st.markdown(f"**{i}.** {tip}")
-            
-    with tab4:
-        st.subheader("🧮 개체 맞춤 먹이량 계산기")
-        st.write("도마뱀의 성장 단계에 맞는 먹이 급여 주기와 양을 계산합니다.")
-        
-        age_type = st.radio("성장 단계", ["베이비/유체 (1~6개월)", "아성체/준성체 (6~12개월)", "성체 (12개월 이상)"], horizontal=True)
-        
-        if selected_lizard_name == "크레스티드 게코":
-            if "베이비" in age_type:
-                st.success("🍼 **급여 가이드**: 케첩 정도 농도의 슈퍼푸드를 소량 매일 또는 격일로 급여하세요.")
-            elif "아성체" in age_type:
-                st.success("🦎 **급여 가이드**: 주 3회 슈퍼푸드 급여 + 주 1회 귀뚜라미 2~3마리 특식")
-            else:
-                st.success("👑 **급여 가이드**: 주 2~3회 슈퍼푸드 급여 (50원 동전 크기 양)")
-        elif selected_lizard_name == "레오파드 게코":
-            if "베이비" in age_type:
-                st.success("🍼 **급여 가이드**: 매일 소형 밀웜/귀뚜라미 3~5마리 (칼슘 더스팅 필수)")
-            else:
-                st.success("👑 **급여 가이드**: 2~3일에 1회, 중/대형 귀뚜라미나 밀웜 4~6마리")
-        else:
-            st.info("종별 특성에 맞는 식단표를 참고하여 곤충과 야채 비율을 맞춰주세요.")
 
 st.divider()
-st.caption("Disclaimer: 본 사육 가이드는 일반적인 권장 사항이며, 개체별 건강 상태 및 환경에 따라 차이가 있을 수 있습니다.")
+st.caption("Disclaimer: 제시된 분양가는 숍/개인 분양 및 모프(색상/패턴)에 따라 달라질 수 있으며 일반적인 평균 기준입니다.")
