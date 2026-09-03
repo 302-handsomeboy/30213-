@@ -1,14 +1,14 @@
 import streamlit as st
 
-# 1. 페이지 기본 설정 및 고대비 카툰 테마
+# 1. 페이지 기본 설정 및 깔끔한 화이트 카툰 테마
 st.set_page_config(
-    page_title="🦎 파충류 사육 대백과 - 카툰 프리미엄",
+    page_title="🦎 파충류 사육 대백과 - 화이트 에디션",
     page_icon="🎨",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS - 초고대비 텍스트 & 정글 카툰 테마
+# Custom CSS - 흰색 배경 & 검은색 텍스트 (고대비 스타일)
 st.markdown(
     """
 <style>
@@ -18,70 +18,72 @@ st.markdown(
         font-family: 'Jua', 'Noto Sans KR', sans-serif;
     }
     
+    /* 앱 전체 배경 - 흰색 */
     .stApp {
-        background-color: #0f172a;
-        background-image: radial-gradient(#1e293b 20%, transparent 20%);
-        background-size: 20px 20px;
-        color: #ffffff;
+        background-color: #ffffff !important;
+        color: #000000 !important;
     }
 
+    /* 사이드바 배경 - 연한 그레이/흰색 */
     section[data-testid="stSidebar"] {
-        background-color: #1e293b !important;
-        border-right: 4px solid #000000;
+        background-color: #f8fafc !important;
+        border-right: 3px solid #000000 !important;
     }
 
-    /* 고대비 만화풍 카드 (글씨 크기 및 대비 강화) */
+    /* 만화풍 카드 (흰색 배경 + 검은색 테두리 + 검은색 텍스트) */
     .comic-card {
-        background-color: #000000;
-        border: 3.5px solid #22c55e;
+        background-color: #ffffff;
+        border: 3px solid #000000;
         border-radius: 16px;
         padding: 24px;
         margin-bottom: 20px;
-        box-shadow: 6px 6px 0px #22c55e;
-        color: #ffffff !important;
+        box-shadow: 5px 5px 0px #000000;
+        color: #000000 !important;
     }
 
     .comic-card h4, .comic-card h3, .comic-card h2, .comic-card h1 {
-        color: #fde047 !important;
+        color: #000000 !important;
         font-size: 22px !important;
         font-weight: 900 !important;
         margin-bottom: 12px !important;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 6px;
     }
 
-    .comic-card p, .comic-card li, .comic-card span {
-        color: #ffffff !important;
+    .comic-card p, .comic-card li, .comic-card span, .comic-card div {
+        color: #000000 !important;
         font-size: 17px !important;
         line-height: 1.7 !important;
         font-weight: 500;
     }
 
     .comic-card strong {
-        color: #86efac !important;
+        color: #15803d !important;
         font-weight: 900 !important;
     }
 
-    /* 카툰 헤더 */
+    /* 메인 헤더 박스 */
     .comic-header {
-        background: #15803d;
-        border: 4px solid #000000;
+        background: #f1f5f9;
+        border: 3.5px solid #000000;
         border-radius: 20px;
         padding: 26px;
         margin-bottom: 24px;
-        box-shadow: 8px 8px 0px #000000;
-        color: #ffffff;
+        box-shadow: 6px 6px 0px #000000;
+        color: #000000 !important;
     }
 
-    /* 가독성 강화 말풍선 */
+    /* 말풍선 */
     .speech-bubble {
         position: relative;
         background: #fef08a;
-        border: 3.5px solid #000000;
+        border: 3px solid #000000;
         border-radius: 16px;
         padding: 18px;
         color: #000000 !important;
         font-weight: 900;
-        font-size: 18px;
-        box-shadow: 5px 5px 0px #000000;
+        font-size: 17px;
+        box-shadow: 4px 4px 0px #000000;
         margin-bottom: 15px;
         text-align: center;
     }
@@ -100,29 +102,29 @@ st.markdown(
         width: 0;
     }
 
-    /* 카툰 데이터 스탯 박스 */
+    /* 수치 데이터 박스 */
     .comic-stat {
-        background-color: #0f172a;
-        border: 2px solid #38bdf8;
+        background-color: #f8fafc;
+        border: 2px solid #000000;
         border-radius: 12px;
         padding: 14px;
         margin-bottom: 12px;
     }
     .comic-stat-title {
         font-size: 15px;
-        color: #38bdf8;
+        color: #475569;
         font-weight: 900;
     }
     .comic-stat-val {
         font-size: 18px;
-        color: #fde047;
+        color: #000000;
         font-weight: 900;
         margin-top: 4px;
     }
 
-    /* 배지 스타일 */
+    /* 난이도 배지 */
     .badge-easy {
-        background-color: #22c55e;
+        background-color: #86efac;
         color: #000000 !important;
         border: 2px solid #000000;
         padding: 6px 14px;
@@ -131,7 +133,7 @@ st.markdown(
         font-size: 15px;
     }
     .badge-medium {
-        background-color: #eab308;
+        background-color: #fef08a;
         color: #000000 !important;
         border: 2px solid #000000;
         padding: 6px 14px;
@@ -140,8 +142,8 @@ st.markdown(
         font-size: 15px;
     }
     .badge-hard {
-        background-color: #ef4444;
-        color: #ffffff !important;
+        background-color: #fca5a5;
+        color: #000000 !important;
         border: 2px solid #000000;
         padding: 6px 14px;
         border-radius: 12px;
@@ -149,33 +151,41 @@ st.markdown(
         font-size: 15px;
     }
 
-    /* 탭 스타일링 (선명화) */
+    /* 탭 스타일링 */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
     .stTabs [data-baseweb="tab"] {
-        background-color: #1e293b;
-        border: 2.5px solid #475569 !important;
+        background-color: #f1f5f9;
+        border: 2px solid #000000 !important;
         border-radius: 12px 12px 0 0 !important;
-        color: #ffffff !important;
+        color: #000000 !important;
         font-weight: 900 !important;
         font-size: 16px !important;
-        padding: 12px 20px !important;
+        padding: 10px 18px !important;
     }
     .stTabs [aria-selected="true"] {
-        background-color: #22c55e !important;
+        background-color: #bbf7d0 !important;
         color: #000000 !important;
         border-color: #000000 !important;
     }
 
+    /* 프로필 아이콘 프레임 */
     .hero-frame {
-        background: #fde047;
-        border: 4px solid #000000;
+        background: #fef08a;
+        border: 3.5px solid #000000;
         border-radius: 20px;
         text-align: center;
         padding: 22px;
-        box-shadow: 6px 6px 0px #000000;
+        box-shadow: 5px 5px 0px #000000;
         margin-bottom: 20px;
+    }
+
+    /* Streamlit 기본 위젯 글자색 강제 적용 */
+    .stSelectbox label, .stCheckbox span, .stSlider label {
+        color: #000000 !important;
+        font-weight: 900 !important;
+        font-size: 16px !important;
     }
 </style>
 """,
@@ -618,11 +628,11 @@ REPTILE_DB = {
     },
 }
 
-# 3. 사이드바 - 파충류 선택 및 예산 계산기
+# 3. 사이드바 - 파충류 선택 및 체크리스트
 with st.sidebar:
     st.markdown(
         """
-    <div style="background: #22c55e; border: 3px solid #000000; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 4px 4px 0px #000000; margin-bottom: 15px;">
+    <div style="background: #ffffff; border: 3px solid #000000; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 4px 4px 0px #000000; margin-bottom: 15px;">
         <h2 style="color: #000000; margin: 0; font-size: 22px; font-weight: 900;">⛺ 정글 탐험 본부</h2>
         <p style="color: #000000; margin: 0; font-size: 13px; font-weight: bold;">파충류 10종 백과사전 선택</p>
     </div>
@@ -649,8 +659,8 @@ with st.sidebar:
 
     st.markdown(
         """
-    <div style="background: #000000; border: 2.5px solid #22c55e; border-radius: 12px; padding: 12px; box-shadow: 4px 4px 0px #22c55e;">
-        <h4 style="color: #fde047 !important; margin-top: 0; font-size: 17px !important;">🎒 필수 장비 점검 체크리스트</h4>
+    <div style="background: #ffffff; border: 2.5px solid #000000; border-radius: 12px; padding: 12px; box-shadow: 3px 3px 0px #000000;">
+        <h4 style="color: #000000 !important; margin-top: 0; font-size: 17px !important; border-bottom: 1.5px solid #000000;">🎒 필수 장비 점검 체크리스트</h4>
     </div>
     """,
         unsafe_allow_html=True,
@@ -673,13 +683,13 @@ st.markdown(
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
         <div>
             <span class="{reptile['difficulty_badge']}">{reptile['difficulty']}</span>
-            <span style="background-color: #000000; color: #86efac; border: 2px solid #000000; padding: 6px 14px; border-radius: 12px; font-weight: 900; font-size: 15px; margin-left: 8px;">{reptile['category']}</span>
-            <h1 style="margin: 12px 0 5px 0; font-size: 42px; font-weight: 900; text-shadow: 3px 3px 0px #000000; color: #ffffff;">{reptile['icon']} {selected_name}</h1>
-            <p style="color: #dcfce7; margin: 0; font-weight: bold; font-size: 18px;">{reptile['en_name']} | 학명: {reptile['scientific_name']}</p>
+            <span style="background-color: #ffffff; color: #000000; border: 2px solid #000000; padding: 6px 14px; border-radius: 12px; font-weight: 900; font-size: 15px; margin-left: 8px;">{reptile['category']}</span>
+            <h1 style="margin: 12px 0 5px 0; font-size: 42px; font-weight: 900; color: #000000;">{reptile['icon']} {selected_name}</h1>
+            <p style="color: #334155; margin: 0; font-weight: bold; font-size: 18px;">{reptile['en_name']} | 학명: {reptile['scientific_name']}</p>
         </div>
     </div>
-    <hr style="border-color: #000000; margin: 18px 0; border-width: 2.5px;">
-    <p style="font-size: 18px; line-height: 1.7; color: #ffffff; margin: 0; font-weight: bold;">{reptile['summary']}</p>
+    <hr style="border-color: #000000; margin: 18px 0; border-width: 1.5px;">
+    <p style="font-size: 18px; line-height: 1.7; color: #000000; margin: 0; font-weight: bold;">{reptile['summary']}</p>
 </div>
 """,
     unsafe_allow_html=True,
@@ -694,7 +704,7 @@ with col1:
     <div class="hero-frame">
         <div style="font-size: 95px; line-height: 1.1;">{reptile['icon']}</div>
         <div style="font-size: 26px; font-weight: 900; color: #000000; margin-top: 5px;">{selected_name}</div>
-        <div style="font-size: 15px; font-weight: 900; color: #166534; background: #bbf7d0; border: 2px solid #000000; border-radius: 8px; padding: 6px; margin-top: 10px;">
+        <div style="font-size: 15px; font-weight: 900; color: #000000; background: #ffffff; border: 2px solid #000000; border-radius: 8px; padding: 6px; margin-top: 10px;">
             원산지: {reptile['origin']}
         </div>
     </div>
@@ -704,7 +714,7 @@ with col1:
 
     st.markdown(
         """
-    <div style="background: #000000; color: #fde047; padding: 8px 14px; border-radius: 10px 10px 0 0; font-weight: 900; font-size: 16px; border: 2.5px solid #22c55e; border-bottom: none;">
+    <div style="background: #000000; color: #ffffff; padding: 8px 14px; border-radius: 10px 10px 0 0; font-weight: 900; font-size: 16px; border: 2.5px solid #000000; border-bottom: none;">
         ⚡ 한눈에 보는 수치 데이터
     </div>
     """,
@@ -756,7 +766,7 @@ with col2:
         <div class="comic-card">
             <h4>📖 {selected_name} 세부 특징 및 사육 개요</h4>
             <p>{reptile['detail_desc']}</p>
-            <hr style="border-color: #334155; margin: 15px 0;">
+            <hr style="border-color: #000000; margin: 15px 0;">
             <p><strong>🎨 주요 인기 모프/종류:</strong> {reptile['morphs']}</p>
         </div>
         """,
@@ -773,8 +783,8 @@ with col2:
                 <li style="margin-bottom: 8px;"><strong>🛠️ 초기 사육 용품 비용:</strong> {reptile['setup_cost']}</li>
                 <li style="margin-bottom: 8px;"><strong>🥖 월 먹이 및 유지 비용:</strong> {reptile['monthly_cost']}</li>
             </ul>
-            <hr style="border-color: #334155; margin: 15px 0;">
-            <p style="font-size: 14px !important; color: #cbd5e1 !important;">* 초기 비용에는 사육장, 열원, 조명, 바닥재, 은신처, 물그릇 등이 포함되며 모프 및 사육장 재질(원목/유리/아크릴)에 따라 차이가 있을 수 있습니다.</p>
+            <hr style="border-color: #000000; margin: 15px 0;">
+            <p style="font-size: 14px !important; color: #475569 !important;">* 초기 비용에는 사육장, 열원, 조명, 바닥재, 은신처, 물그릇 등이 포함되며 모프 및 사육장 재질(원목/유리/아크릴)에 따라 차이가 있을 수 있습니다.</p>
         </div>
         """,
             unsafe_allow_html=True,
@@ -785,7 +795,7 @@ with col2:
             f"""
         <div class="comic-card">
             {reptile['env_detail']}
-            <hr style="border-color: #334155; margin: 15px 0;">
+            <hr style="border-color: #000000; margin: 15px 0;">
             <p><strong>📦 권장 사육장 크기:</strong> {reptile['cage_size']}</p>
         </div>
         """,
@@ -867,8 +877,8 @@ with c_bot2:
 st.divider()
 st.markdown(
     """
-<div style="text-align: center; color: #cbd5e1; font-weight: bold; font-size: 14px;">
-    🐊 Reptile Encyclopedia Premium Edition | 10종 대용량 파충류 백과사전 가이드 🦎
+<div style="text-align: center; color: #000000; font-weight: bold; font-size: 14px;">
+    🐊 Reptile Encyclopedia White Edition | 10종 대용량 파충류 백과사전 가이드 🦎
 </div>
 """,
     unsafe_allow_html=True,
