@@ -5,11 +5,12 @@ st.set_page_config(
     page_title="🦎 파충류 사육 대백과 - 카툰 프리미엄",
     page_icon="🎨",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
-# Custom CSS - 고대비 텍스트 & 정글 카툰 테마
-st.markdown("""
+# Custom CSS - 초고대비 텍스트 & 정글 카툰 테마
+st.markdown(
+    """
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
@@ -18,23 +19,23 @@ st.markdown("""
     }
     
     .stApp {
-        background-color: #111827;
-        background-image: radial-gradient(#1f2937 20%, transparent 20%);
+        background-color: #0f172a;
+        background-image: radial-gradient(#1e293b 20%, transparent 20%);
         background-size: 20px 20px;
-        color: #f9fafb;
+        color: #ffffff;
     }
 
     section[data-testid="stSidebar"] {
-        background-color: #1f2937 !important;
+        background-color: #1e293b !important;
         border-right: 4px solid #000000;
     }
 
-    /* 고대비 만화풍 카드 */
+    /* 고대비 만화풍 카드 (글씨 크기 및 대비 강화) */
     .comic-card {
         background-color: #000000;
-        border: 3px solid #22c55e;
+        border: 3.5px solid #22c55e;
         border-radius: 16px;
-        padding: 22px;
+        padding: 24px;
         margin-bottom: 20px;
         box-shadow: 6px 6px 0px #22c55e;
         color: #ffffff !important;
@@ -42,12 +43,21 @@ st.markdown("""
 
     .comic-card h4, .comic-card h3, .comic-card h2, .comic-card h1 {
         color: #fde047 !important;
+        font-size: 22px !important;
+        font-weight: 900 !important;
+        margin-bottom: 12px !important;
     }
 
     .comic-card p, .comic-card li, .comic-card span {
-        color: #f3f4f6 !important;
-        font-size: 15px;
-        line-height: 1.6;
+        color: #ffffff !important;
+        font-size: 17px !important;
+        line-height: 1.7 !important;
+        font-weight: 500;
+    }
+
+    .comic-card strong {
+        color: #86efac !important;
+        font-weight: 900 !important;
     }
 
     /* 카툰 헤더 */
@@ -55,7 +65,7 @@ st.markdown("""
         background: #15803d;
         border: 4px solid #000000;
         border-radius: 20px;
-        padding: 24px;
+        padding: 26px;
         margin-bottom: 24px;
         box-shadow: 8px 8px 0px #000000;
         color: #ffffff;
@@ -65,13 +75,15 @@ st.markdown("""
     .speech-bubble {
         position: relative;
         background: #fef08a;
-        border: 3px solid #000000;
+        border: 3.5px solid #000000;
         border-radius: 16px;
-        padding: 16px;
+        padding: 18px;
         color: #000000 !important;
-        font-weight: bold;
+        font-weight: 900;
+        font-size: 18px;
         box-shadow: 5px 5px 0px #000000;
         margin-bottom: 15px;
+        text-align: center;
     }
     .speech-bubble p, .speech-bubble span {
         color: #000000 !important;
@@ -80,7 +92,7 @@ st.markdown("""
         content: '';
         position: absolute;
         bottom: -15px;
-        left: 30px;
+        left: 40px;
         border-width: 15px 15px 0;
         border-style: solid;
         border-color: #fef08a transparent;
@@ -90,60 +102,65 @@ st.markdown("""
 
     /* 카툰 데이터 스탯 박스 */
     .comic-stat {
-        background-color: #111827;
-        border: 2px solid #374151;
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 10px;
+        background-color: #0f172a;
+        border: 2px solid #38bdf8;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
     }
     .comic-stat-title {
-        font-size: 13px;
-        color: #9ca3af;
-        font-weight: bold;
+        font-size: 15px;
+        color: #38bdf8;
+        font-weight: 900;
     }
     .comic-stat-val {
-        font-size: 16px;
+        font-size: 18px;
         color: #fde047;
         font-weight: 900;
+        margin-top: 4px;
     }
 
     /* 배지 스타일 */
     .badge-easy {
         background-color: #22c55e;
-        color: #000 !important;
-        border: 2px solid #000;
-        padding: 4px 12px;
-        border-radius: 10px;
+        color: #000000 !important;
+        border: 2px solid #000000;
+        padding: 6px 14px;
+        border-radius: 12px;
         font-weight: 900;
+        font-size: 15px;
     }
     .badge-medium {
         background-color: #eab308;
-        color: #000 !important;
-        border: 2px solid #000;
-        padding: 4px 12px;
-        border-radius: 10px;
+        color: #000000 !important;
+        border: 2px solid #000000;
+        padding: 6px 14px;
+        border-radius: 12px;
         font-weight: 900;
+        font-size: 15px;
     }
     .badge-hard {
         background-color: #ef4444;
-        color: #fff !important;
-        border: 2px solid #000;
-        padding: 4px 12px;
-        border-radius: 10px;
+        color: #ffffff !important;
+        border: 2px solid #000000;
+        padding: 6px 14px;
+        border-radius: 12px;
         font-weight: 900;
+        font-size: 15px;
     }
 
-    /* 탭 스타일링 */
+    /* 탭 스타일링 (선명화) */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
     .stTabs [data-baseweb="tab"] {
-        background-color: #111827;
-        border: 2px solid #374151 !important;
-        border-radius: 10px 10px 0 0 !important;
-        color: #d1d5db !important;
-        font-weight: bold !important;
-        padding: 10px 16px !important;
+        background-color: #1e293b;
+        border: 2.5px solid #475569 !important;
+        border-radius: 12px 12px 0 0 !important;
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        font-size: 16px !important;
+        padding: 12px 20px !important;
     }
     .stTabs [aria-selected="true"] {
         background-color: #22c55e !important;
@@ -153,17 +170,19 @@ st.markdown("""
 
     .hero-frame {
         background: #fde047;
-        border: 4px solid #000;
+        border: 4px solid #000000;
         border-radius: 20px;
         text-align: center;
-        padding: 20px;
-        box-shadow: 6px 6px 0px #000;
+        padding: 22px;
+        box-shadow: 6px 6px 0px #000000;
         margin-bottom: 20px;
     }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-# 2. 파충류 10종 대용량 데이터베이스 (비용/설명 대폭 강화)
+# 2. 파충류 10종 대용량 데이터베이스
 REPTILE_DB = {
     "크레스티드 게코": {
         "category": "붙붙이 도마뱀",
@@ -206,7 +225,7 @@ REPTILE_DB = {
         #### 🩺 건강 및 탈피 관리
         - **꼬리 자름**: 놀라거나 잡히면 꼬리를 자르고 도망칩니다. 자란 꼬리는 재생되지 않으므로 꼬리를 잡지 마세요.
         - **탈피 부전**: 습도가 너무 낮으면 손가락 끝에 탈피 껍질이 남아 괴사할 수 있으므로 탈피기에는 온수 족욕을 시켜줍니다.
-        """
+        """,
     },
     "레오파드 게코": {
         "category": "지상성 게코",
@@ -247,7 +266,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 건강 및 꼬리 상태
         - **꼬리 두께**: 꼬리가 머리 두께만큼 통통해야 건강한 상태입니다. 꼬리가 얇아지면 거식이나 기생충 감염을 의심해야 합니다.
-        """
+        """,
     },
     "비어디 드래곤": {
         "category": "주행성 도마뱀",
@@ -286,7 +305,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 온수 족욕 및 뼈 건강
         - UVB 조명이 부족하면 뼈가 무너지는 MBD 질환에 걸릴 수 있습니다. 주 2회 따뜻한 물에 15분간 온수욕을 시켜 소화를 돕습니다.
-        """
+        """,
     },
     "콘스네이크": {
         "category": "뱀 (옥수수뱀)",
@@ -326,7 +345,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 소화 및 핸들링 수칙
         - 먹이를 먹은 후 최소 48시간 동안은 핸들링을 하지 마세요. 거칠게 만지면 먹었던 쥐를 토할 수 있습니다.
-        """
+        """,
     },
     "볼파이톤": {
         "category": "뱀 (비단뱀)",
@@ -365,7 +384,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 호흡기 질환 예방
         - 사육장이 차갑고 축축하면 거품 침을 흘리는 호흡기 질환에 걸리기 쉬우므로 핫존 온도를 일정하게 유지하세요.
-        """
+        """,
     },
     "동부 호스필드 육지거북": {
         "category": "육지거북",
@@ -404,7 +423,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 피라미딩 예방 & 온수욕
         - 등갑이 솟아오르는 피라미딩을 방지하기 위해 적절한 습도와 칼슘을 제공하고, 주 3회 따뜻한 물로 온수욕을 시켜줍니다.
-        """
+        """,
     },
     "사바나 모니터": {
         "category": "왕도마뱀 (모니터)",
@@ -443,7 +462,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 비만 및 테이밍 관리
         - 과도한 지방 섭취는 간부전을 유발합니다. 어릴 때부터 손에 익숙해지도록 길들여야(테이밍) 안전합니다.
-        """
+        """,
     },
     "무어리시 게코": {
         "category": "벽면 부착성 게코",
@@ -480,7 +499,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 관상 위주 사육
         - 스피드가 매우 빠르므로 잡으려다 놓치면 방 구석으로 탈출할 수 있으니 핸들링 시 주의하세요.
-        """
+        """,
     },
     "베일드 카멜레온": {
         "category": "카멜레온",
@@ -518,7 +537,7 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 스트레스 및 환기 관리
         - 스트레스에 매우 취약하므로 1케이지 1개체 단독 사육을 해야 하며 과도한 스킨십을 피해야 합니다.
-        """
+        """,
     },
     "푸른혀 도마뱀": {
         "category": "지상성 스킨크",
@@ -556,89 +575,144 @@ REPTILE_DB = {
         "health_detail": """
         #### 🩺 발가락 탈피 관리
         - 발가락 비늘 탈피가 잘 되지 않으면 괴사할 수 있으므로 탈피 시 습도 관리에 신경 써주세요.
-        """
-    }
+        """,
+    },
+    "레오파드 육지거북": {
+        "category": "대형 육지거북",
+        "en_name": "Leopard Tortoise",
+        "scientific_name": "Stigmochelys pardalis",
+        "icon": "🐢",
+        "difficulty": "★★★ 대형/습도 주의",
+        "difficulty_badge": "badge-hard",
+        "price": "20만 ~ 45만원",
+        "setup_cost": "약 30만 ~ 60만원 (4자~5자 원목 사육장, 스팟, UVB, 보온 장비)",
+        "monthly_cost": "약 3만원 ~ 5만원 (건초, 신선 야채, 칼슘 영양제)",
+        "temp": "바스킹존 35°C - 38°C / 쿨존 28°C - 30°C",
+        "humidity": "50% - 70% (유체기 높은 습도 필수)",
+        "size": "40cm - 60cm (대형)",
+        "lifespan": "50년 - 100년 이상",
+        "diet_type": "100% 고섬유질 초식성",
+        "cage_size": "150x90cm 이상 (성체 시 방 한 칸 구역 필요)",
+        "motto": "표범 무늬 등갑을 가진 거대하고 아늑한 귀요미!",
+        "summary": "표범 무늬처럼 화려하고 아름다운 등갑 패턴을 가진 대형 육지거북! 온순한 성격과 커다란 덩치로 애호가들에게 사랑받는 장수 파충류입니다.",
+        "origin": "아프리카 동남부 건조 사바나 초원",
+        "morphs": "바부키, 소말리아 레오파드",
+        "detail_desc": """
+        레오파드 육지거북은 웅장하고 아름다운 등갑 무늬를 특징으로 합니다. 성체가 되면 40cm가 넘게 자라므로 성장함에 따라 넓은 공간 확보가 필수적입니다.
+        어릴 때(유체)는 건조하면 등갑 모양이 피라미드처럼 기형으로 솟는 피라미딩 현상이나 감기에 걸리기 쉬우므로 high-humidity(높은 습도)와 높은 온도를 섬세하게 유지해 주어야 합니다.
+        """,
+        "env_detail": """
+        #### 🦒 넓은 사육장 & 고온 다습 세팅
+        - **온도/조명**: 주간 핫존 35°C 이상, 쿨존도 28°C 이상으로 따뜻하게 유지하며 강력한 UVB 램프를 매일 10~12시간 켜줍니다.
+        - **바닥재**: 습도를 머금을 수 있는 코코칩이나 바크를 넉넉히 깔아줍니다.
+        """,
+        "diet_detail": """
+        #### 🌾 고섬유질 건초 & 야채 식단
+        - **주식**: 알팔파/티모시 건초 가루, 치커리, 청경채, 로메인, 민들레 잎.
+        - **주의**: 수분이 너무 많은 야채나 과일은 설사를 유발할 수 있으므로 건초 비율을 높여 급여합니다.
+        """,
+        "health_detail": """
+        #### 🩺 피라미딩 예방 & 감기 주의
+        - 어린 시기에는 온수욕을 매일 15분씩 시켜주어 요산 배출을 돕고 등갑이 예쁘고 평평하게 자라도록 유도합니다.
+        """,
+    },
 }
 
 # 3. 사이드바 - 파충류 선택 및 예산 계산기
 with st.sidebar:
-    st.markdown("""
-    <div style="background: #22c55e; border: 3px solid #000; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 4px 4px 0px #000; margin-bottom: 15px;">
-        <h2 style="color: #000; margin: 0; font-size: 22px;">⛺ 정글 탐험 본부</h2>
-        <p style="color: #000; margin: 0; font-size: 12px; font-weight: bold;">파충류 10종 백과사전 선택</p>
+    st.markdown(
+        """
+    <div style="background: #22c55e; border: 3px solid #000000; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 4px 4px 0px #000000; margin-bottom: 15px;">
+        <h2 style="color: #000000; margin: 0; font-size: 22px; font-weight: 900;">⛺ 정글 탐험 본부</h2>
+        <p style="color: #000000; margin: 0; font-size: 13px; font-weight: bold;">파충류 10종 백과사전 선택</p>
     </div>
-    """, unsafe_allow_html=True)
-    
-    selected_name = st.selectbox(
-        "🦎 탐험할 파충류 선택:",
-        list(REPTILE_DB.keys())
+    """,
+        unsafe_allow_html=True,
     )
-    
+
+    selected_name = st.selectbox("🦎 탐험할 파충류 선택:", list(REPTILE_DB.keys()))
+
     reptile = REPTILE_DB[selected_name]
-    
+
     st.markdown("<br>", unsafe_allow_html=True)
-    
-    st.markdown(f"""
+
+    st.markdown(
+        f"""
     <div class="speech-bubble">
         💬 "{reptile['motto']}"
     </div>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     st.markdown("<br>", unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div style="background: #000000; border: 2px solid #22c55e; border-radius: 12px; padding: 12px; box-shadow: 4px 4px 0px #22c55e;">
-        <h4 style="color: #fde047 !important; margin-top: 0; font-size: 16px;">🎒 필수 장비 점검 체크리스트</h4>
+
+    st.markdown(
+        """
+    <div style="background: #000000; border: 2.5px solid #22c55e; border-radius: 12px; padding: 12px; box-shadow: 4px 4px 0px #22c55e;">
+        <h4 style="color: #fde047 !important; margin-top: 0; font-size: 17px !important;">🎒 필수 장비 점검 체크리스트</h4>
     </div>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     c1 = st.checkbox("사육장 (케이지)")
     c2 = st.checkbox("온열 장판 / 스팟 램프")
     c3 = st.checkbox("UVB 조명 (주행성 한정)")
     c4 = st.checkbox("전용 바닥재 & 은신처")
     c5 = st.checkbox("먹이 & 칼슘 파우더")
     c6 = st.checkbox("특수동물병원 위치 확인")
-    
+
     checked_count = sum([c1, c2, c3, c4, c5, c6])
     st.progress(checked_count / 6)
 
 # 4. 메인 화면 - 파충류 상세 정보
-st.markdown(f"""
+st.markdown(
+    f"""
 <div class="comic-header">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
         <div>
             <span class="{reptile['difficulty_badge']}">{reptile['difficulty']}</span>
-            <span style="background-color: #000; color: #86efac; border: 2px solid #000; padding: 4px 12px; border-radius: 10px; font-weight: bold; margin-left: 8px;">{reptile['category']}</span>
-            <h1 style="margin: 12px 0 5px 0; font-size: 38px; text-shadow: 2px 2px 0px #000;">{reptile['icon']} {selected_name}</h1>
-            <p style="color: #dcfce7; margin: 0; font-weight: bold;">{reptile['en_name']} | 학명: {reptile['scientific_name']}</p>
+            <span style="background-color: #000000; color: #86efac; border: 2px solid #000000; padding: 6px 14px; border-radius: 12px; font-weight: 900; font-size: 15px; margin-left: 8px;">{reptile['category']}</span>
+            <h1 style="margin: 12px 0 5px 0; font-size: 42px; font-weight: 900; text-shadow: 3px 3px 0px #000000; color: #ffffff;">{reptile['icon']} {selected_name}</h1>
+            <p style="color: #dcfce7; margin: 0; font-weight: bold; font-size: 18px;">{reptile['en_name']} | 학명: {reptile['scientific_name']}</p>
         </div>
     </div>
-    <hr style="border-color: #000; margin: 15px 0; border-width: 2px;">
-    <p style="font-size: 16px; line-height: 1.6; color: #ffffff; margin: 0; font-weight: bold;">{reptile['summary']}</p>
+    <hr style="border-color: #000000; margin: 18px 0; border-width: 2.5px;">
+    <p style="font-size: 18px; line-height: 1.7; color: #ffffff; margin: 0; font-weight: bold;">{reptile['summary']}</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # 2열 레이아웃
 col1, col2 = st.columns([1.1, 2.0])
 
 with col1:
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="hero-frame">
-        <div style="font-size: 90px; line-height: 1.1;">{reptile['icon']}</div>
-        <div style="font-size: 24px; font-weight: 900; color: #000;">{selected_name}</div>
-        <div style="font-size: 13px; font-weight: bold; color: #166534; background: #bbf7d0; border: 2px solid #000; border-radius: 8px; padding: 4px; margin-top: 6px;">
+        <div style="font-size: 95px; line-height: 1.1;">{reptile['icon']}</div>
+        <div style="font-size: 26px; font-weight: 900; color: #000000; margin-top: 5px;">{selected_name}</div>
+        <div style="font-size: 15px; font-weight: 900; color: #166534; background: #bbf7d0; border: 2px solid #000000; border-radius: 8px; padding: 6px; margin-top: 10px;">
             원산지: {reptile['origin']}
         </div>
     </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div style="background: #000; color: #fde047; padding: 6px 12px; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 14px; border: 2px solid #22c55e; border-bottom: none;">
+    """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+    <div style="background: #000000; color: #fde047; padding: 8px 14px; border-radius: 10px 10px 0 0; font-weight: 900; font-size: 16px; border: 2.5px solid #22c55e; border-bottom: none;">
         ⚡ 한눈에 보는 수치 데이터
     </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
+    """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        f"""
     <div class="comic-card" style="border-top-left-radius: 0; margin-top: 0;">
         <div class="comic-stat">
             <div class="comic-stat-title">🏷️ 개체 분양가</div>
@@ -661,57 +735,82 @@ with col1:
             <div class="comic-stat-val">{reptile['lifespan']}</div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 with col2:
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📖 세부 설명", "💵 용품 & 먹이 비용", "🏠 사육장 세팅", "🥗 먹이 & 영양", "🩺 건강 & 관리"])
-    
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+        [
+            "📖 세부 설명",
+            "💵 용품 & 먹이 비용",
+            "🏠 사육장 세팅",
+            "🥗 먹이 & 영양",
+            "🩺 건강 & 관리",
+        ]
+    )
+
     with tab1:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="comic-card">
             <h4>📖 {selected_name} 세부 특징 및 사육 개요</h4>
             <p>{reptile['detail_desc']}</p>
-            <hr style="border-color: #374151;">
+            <hr style="border-color: #334155; margin: 15px 0;">
             <p><strong>🎨 주요 인기 모프/종류:</strong> {reptile['morphs']}</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with tab2:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="comic-card">
             <h4>💵 사육 물품 비용 & 월 유지비 상세 분석</h4>
-            <ul>
-                <li><strong>🦎 개체 분양가:</strong> {reptile['price']}</li>
-                <li><strong>🛠️ 초기 사육 용품 비용:</strong> {reptile['setup_cost']}</li>
-                <li><strong>🥖 월 먹이 및 유지 비용:</strong> {reptile['monthly_cost']}</li>
+            <ul style="padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>🦎 개체 분양가:</strong> {reptile['price']}</li>
+                <li style="margin-bottom: 8px;"><strong>🛠️ 초기 사육 용품 비용:</strong> {reptile['setup_cost']}</li>
+                <li style="margin-bottom: 8px;"><strong>🥖 월 먹이 및 유지 비용:</strong> {reptile['monthly_cost']}</li>
             </ul>
-            <hr style="border-color: #374151;">
-            <p style="font-size: 13px; color: #9ca3af !important;">* 초기 비용에는 사육장, 열원, 조명, 바닥재, 은신처, 물그릇 등이 포함되며 모프 및 사육장 재질(원목/유리/아크릴)에 따라 차이가 있을 수 있습니다.</p>
+            <hr style="border-color: #334155; margin: 15px 0;">
+            <p style="font-size: 14px !important; color: #cbd5e1 !important;">* 초기 비용에는 사육장, 열원, 조명, 바닥재, 은신처, 물그릇 등이 포함되며 모프 및 사육장 재질(원목/유리/아크릴)에 따라 차이가 있을 수 있습니다.</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with tab3:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="comic-card">
             {reptile['env_detail']}
-            <hr style="border-color: #374151;">
+            <hr style="border-color: #334155; margin: 15px 0;">
             <p><strong>📦 권장 사육장 크기:</strong> {reptile['cage_size']}</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with tab4:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="comic-card">
             {reptile['diet_detail']}
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with tab5:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="comic-card">
             {reptile['health_detail']}
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
 # 하단 - 방 온도 진단 및 에티켓
 st.markdown("<br>", unsafe_allow_html=True)
@@ -719,43 +818,58 @@ st.markdown("<br>", unsafe_allow_html=True)
 c_bot1, c_bot2 = st.columns(2)
 
 with c_bot1:
-    st.markdown("""
+    st.markdown(
+        """
     <div class="comic-card">
         <h4>🌡️ 우리집 실내 온도 적합성 테스트</h4>
         <p>현재 내 방 온도를 설정하고 파충류 적합성을 진단해보세요.</p>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     user_temp = st.slider("현재 내 방 온도 (°C)", 15, 38, 24)
-    
+
     if st.button("🔥 적합도 테스트 실행"):
         if "크레스티드" in selected_name:
             if user_temp > 27:
-                st.error("🚨 경고! 방 온도가 너무 높습니다! 크레스티드 게코는 28°C 이상 노출 시 치명적입니다.")
+                st.error(
+                    "🚨 경고! 방 온도가 너무 높습니다! 크레스티드 게코는 28°C 이상 노출 시 치명적입니다."
+                )
             elif 20 <= user_temp <= 26:
-                st.success("✅ 최고입니다! 크레스티드 게코가 살기에 가장 완벽한 온도입니다!")
+                st.success(
+                    "✅ 최고입니다! 크레스티드 게코가 살기에 가장 완벽한 온도입니다!"
+                )
             else:
                 st.warning("⚠️ 조금 서늘하네요! 22°C 이상을 유지해주세요.")
         else:
-            st.info(f"✅ 현재 설정된 온도({user_temp}°C)에 맞추어 온열 장판이나 스팟 램프 조절을 통해 환경을 맞춰주세요.")
-            
+            st.info(
+                f"✅ 현재 설정된 온도({user_temp}°C)에 맞추어 온열 장판이나 스팟 램프 조절을 통해 환경을 맞춰주세요."
+            )
+
     st.markdown("</div>", unsafe_allow_html=True)
 
 with c_bot2:
-    st.markdown("""
+    st.markdown(
+        """
     <div class="comic-card">
         <h4>📌 필수 파충류 집사 수칙</h4>
-        <ul style="line-height: 1.8;">
+        <ul style="line-height: 1.9; padding-left: 20px;">
             <li>만지기 전후로 반드시 따뜻한 물과 비누로 손을 씻어주세요.</li>
             <li>과도한 스킨십은 스트레스를 유발하므로 적절히 조절해주세요.</li>
             <li>갑자기 먹이를 거부할 때는 사육장 온도와 습도를 최우선으로 점검하세요.</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 # 하단 풋터
 st.divider()
-st.markdown("""
-<div style="text-align: center; color: #9ca3af; font-weight: bold; font-size: 13px;">
+st.markdown(
+    """
+<div style="text-align: center; color: #cbd5e1; font-weight: bold; font-size: 14px;">
     🐊 Reptile Encyclopedia Premium Edition | 10종 대용량 파충류 백과사전 가이드 🦎
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
